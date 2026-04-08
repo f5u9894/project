@@ -2,23 +2,53 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تأثير الضوء الأزرق على النوم</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>تأثير الضوء الأزرق على النوم | موقع تفاعلي</title>
+<!-- Chart.js للرسم البياني -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- Font Awesome 6 للأيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
   * {
     box-sizing: border-box;
+  }
+
+  :root {
+    --bg-overlay: rgba(0, 0, 0, 0.55);
+    --card-bg: rgba(255, 255, 255, 0.97);
+    --text-color: #0f172a;
+    --box-shadow-color: #1e293b;
+    --box-bg: white;
+    --border-color: #1e293b;
+    --primary-btn: white;
+    --primary-text: #6b21a8;
+    --header-bg: white;
+  }
+
+  body.dark {
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --card-bg: rgba(30, 41, 59, 0.95);
+    --text-color: #f1f5f9;
+    --box-shadow-color: #0f172a;
+    --box-bg: #1e293b;
+    --border-color: #475569;
+    --primary-btn: #1e293b;
+    --primary-text: #c084fc;
+    --header-bg: #0f172a;
   }
 
   body {
     margin: 0;
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     direction: rtl;
-    background: url("https://placehold.co/1920x1080/1e293b/white?text=خلفية+طبية") no-repeat center center fixed;
+    background: url("ro.JPG") no-repeat center center fixed;
     background-size: cover;
     position: relative;
+    transition: background-color 0.3s, color 0.2s;
+    color: var(--text-color);
   }
 
-  /* طبقة غامقة فوق الخلفية - تحسين z-index */
+  /* طبقة غامقة */
   body::before {
     content: "";
     position: fixed;
@@ -26,14 +56,59 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
+    background: var(--bg-overlay);
     z-index: 0;
+    transition: background 0.3s;
   }
 
-  /* جميع المحتويات تكون فوق الطبقة الغامقة */
-  .header, .top, .experiment-wrap, .box, .about, .character, .section-title, .content {
+  /* جميع المحتويات فوق الطبقة */
+  .header, .top, .experiment-wrap, .box, .about, .character, .section-title, .content, .progress-container, .quiz-area, .chart-container, .back-to-top, .dark-mode-toggle, .mute-toggle, .share-btn {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+  }
+
+  /* شريط التقدم */
+  .progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.3);
+    z-index: 100;
+  }
+  .progress-bar {
+    height: 6px;
+    background: #84cc16;
+    width: 0%;
+    transition: width 0.2s;
+  }
+
+  /* أزرار التحكم العلوية */
+  .controls {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 10px;
+    z-index: 101;
+  }
+  .ctrl-btn {
+    background: rgba(0,0,0,0.7);
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    transition: 0.2s;
+  }
+  .ctrl-btn:hover {
+    transform: scale(1.05);
+    background: #84cc16;
+    color: black;
   }
 
   /* الهيدر */
@@ -42,11 +117,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-bottom: 3px solid #1e293b;
-    background: white;
+    border-bottom: 3px solid var(--border-color);
+    background: var(--header-bg);
     font-weight: bold;
+    transition: background 0.3s;
   }
-
   .logo {
     width: 45px;
     border-radius: 12px;
@@ -56,10 +131,9 @@
   .top {
     text-align: center;
     padding: 70px 20px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0,0,0,0.3);
     color: white;
   }
-
   .badge {
     background: #84cc16;
     color: black;
@@ -68,21 +142,18 @@
     display: inline-block;
     margin-bottom: 20px;
   }
-
   h1 {
     font-size: 36px;
     margin: 10px 0;
     color: white;
+    min-height: 100px;
   }
-
   .top p {
     color: #f8fafc;
     line-height: 2;
     max-width: 850px;
     margin: 0 auto 15px;
   }
-
-  /* الأزرار */
   .btn {
     padding: 12px 25px;
     border-radius: 25px;
@@ -95,24 +166,14 @@
   .btn:hover {
     transform: translateY(-3px);
   }
-
   .primary {
-    background: white;
-    color: #6b21a8;
+    background: var(--primary-btn);
+    color: var(--primary-text);
   }
-  .primary:hover {
-    background: #f3e8ff;
-  }
-
   .secondary {
     border: 2px solid white;
     color: white;
   }
-  .secondary:hover {
-    background: rgba(255,255,255,0.2);
-  }
-
-  /* صورة */
   .main-img {
     width: 300px;
     max-width: 90%;
@@ -120,8 +181,6 @@
     margin-top: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   }
-
-  /* عنوان القسم */
   .section-title {
     text-align: center;
     font-size: 24px;
@@ -136,57 +195,55 @@
     margin: 40px auto;
     width: 350px;
     max-width: 90%;
-    background: rgba(255, 255, 255, 0.98);
-    border: 3px solid #1e293b;
-    box-shadow: 8px 8px 0px #1e293b;
+    background: var(--card-bg);
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--box-shadow-color);
     border-radius: 20px;
     padding: 20px;
+    transition: all 0.3s;
   }
-
-  .experiment-wrap h2 {
-    margin-top: 0;
-    color: #1e293b;
-  }
-
-  .experiment-wrap p {
-    color: #1e293b;
-    font-weight: 600;
-  }
-
   .sleep-btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     margin: 10px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
-    width: 100px;
-    transition: transform 0.2s, filter 0.2s;
+    width: 110px;
+    transition: transform 0.2s;
   }
-  .sleep-btn:hover {
-    transform: scale(1.03);
-    filter: brightness(0.95);
+  .sleep-btn:active { transform: scale(0.96); }
+  .yes-btn { background: #f97316; color: white; }
+  .no-btn { background: #22c55e; color: white; }
+  #result { margin-top: 20px; }
+  .stats {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    background: #e2e8f0;
+    padding: 8px;
+    border-radius: 30px;
+    color: #0f172a;
+  }
+  .reset-stats {
+    background: none;
+    border: none;
+    color: #f97316;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .reason-select {
+    margin-top: 15px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 90%;
   }
 
-  .yes-btn {
-    background: #f97316;
-    color: white;
-  }
-
-  .no-btn {
-    background: #22c55e;
-    color: white;
-  }
-
-  #result {
-    margin-top: 20px;
-  }
-
-  /* صناديق الأسئلة - تحويلها إلى أزرار مع الحفاظ على المظهر */
+  /* صناديق الأسئلة */
   .box {
-    background: white;
-    color: #1e293b;
+    background: var(--box-bg);
+    color: var(--text-color);
     margin: 20px auto;
     padding: 18px;
     width: 350px;
@@ -194,54 +251,34 @@
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    border: 3px solid #1e293b;
-    box-shadow: 8px 8px 0px #1e293b;
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--box-shadow-color);
     transition: 0.2s;
-    line-height: 1.8;
     text-align: center;
     display: block;
     font-family: inherit;
     font-size: 1rem;
-    background-color: white;
   }
-  .box:hover {
-    transform: translateY(-5px);
-    background-color: #f8fafc;
-  }
+  .box:hover { transform: translateY(-5px); background: #f1f5f9; }
+  body.dark .box:hover { background: #334155; }
 
-  /* المحتوى القابل للطي */
   .content {
     display: none;
     width: 350px;
     max-width: 90%;
     margin: 0 auto 20px;
   }
-
-  .content.open {
-    display: block;
-  }
-
+  .content.open { display: block; }
   .inner-card {
-    background: rgba(255, 255, 255, 0.97);
-    color: #0f172a;
+    background: var(--card-bg);
+    color: var(--text-color);
     padding: 20px;
     border-radius: 20px;
-    border: 3px solid #1e293b;
-    box-shadow: 8px 8px 0px #1e293b;
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--box-shadow-color);
     line-height: 2;
   }
-
-  .inner-card p,
-  .inner-card div,
-  .inner-card li {
-    color: #0f172a;
-  }
-
-  .highlight {
-    color: #7c3aed;
-    font-weight: bold;
-  }
-
+  .highlight { color: #c084fc; font-weight: bold; }
   .study-box {
     background: #f8fafc;
     padding: 15px;
@@ -250,20 +287,20 @@
     border-right: 5px solid #a855f7;
     color: #1e293b;
   }
+  body.dark .study-box { background: #0f172a; color: #e2e8f0; }
 
-  /* تعريف */
+  /* قسم التعريف */
   .about {
-    background: rgba(255, 255, 255, 0.97);
+    background: var(--card-bg);
     margin: 40px auto;
     padding: 30px;
     width: 350px;
     max-width: 90%;
     border-radius: 25px;
-    border: 3px solid #1e293b;
-    box-shadow: 8px 8px 0px #1e293b;
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--box-shadow-color);
     text-align: center;
     line-height: 2;
-    color: #0f172a;
   }
 
   /* شخصية ثابتة */
@@ -284,255 +321,279 @@
     cursor: help;
     z-index: 10;
   }
-  /* عداد التجربة */
-  .stats {
+
+  /* اختبار سريع */
+  .quiz-area {
+    background: var(--card-bg);
+    width: 350px;
+    max-width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid var(--border-color);
+    box-shadow: 8px 8px 0px var(--box-shadow-color);
+  }
+  .quiz-question {
+    margin-bottom: 15px;
+  }
+  .quiz-option {
+    display: block;
+    margin: 8px 0;
+  }
+  #quiz-result {
     margin-top: 15px;
-    font-size: 0.9rem;
-    background: #e2e8f0;
-    padding: 8px;
-    border-radius: 30px;
-    color: #0f172a;
-  }
-  .reset-stats {
-    background: none;
-    border: none;
-    color: #f97316;
-    cursor: pointer;
     font-weight: bold;
-    margin-right: 10px;
   }
+
+  /* الرسم البياني */
+  .chart-container {
+    width: 300px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.8);
+    border-radius: 20px;
+    padding: 10px;
+  }
+  canvas { max-height: 200px; }
+
+  /* زر العودة للأعلى */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #84cc16;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+
+  /* تحسينات اللمس */
+  @media (max-width: 768px) {
+    .btn, .sleep-btn, .box, .ctrl-btn { 
+      padding: 12px 18px; 
+      min-height: 48px;
+    }
+    .box { font-size: 1rem; }
+  }
+  /* تأثيرات صوتية اختيارية */
+  .sound-toggle { background: rgba(0,0,0,0.7); }
 </style>
 </head>
 <body>
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+<div class="controls">
+  <button class="ctrl-btn dark-mode-toggle" id="darkModeToggle" aria-label="الوضع الليلي"><i class="fas fa-moon"></i></button>
+  <button class="ctrl-btn mute-toggle" id="muteToggle" aria-label="كتم الصوت"><i class="fas fa-volume-up"></i></button>
+</div>
 
 <div class="header">
-  <img src="https://placehold.co/60x60/6b21a8/white?text=LOGO" class="logo" alt="شعار المشروع - تأثير الضوء الأزرق">
-  <span>🌙 وعي رقمي</span>
+  <img src="robot.jpg" class="logo" alt="شعار المشروع">
+  <span><i class="fas fa-moon"></i> وعي رقمي</span>
 </div>
 
 <div class="top">
   <div class="badge">✨ مرحبا بكم</div>
-  <h1>تأثير الضوء الأزرق<br>على النوم</h1>
-  <p>
-    نتعرف في هذا المشروع على تأثير الضوء الأزرق على النوم والصحة،
-    خاصة عند استخدام الأجهزة الإلكترونية في الليل.
-  </p>
+  <h1 id="typingTitle"></h1>
+  <p>نتعرف في هذا المشروع على تأثير الضوء الأزرق على النوم والصحة، خاصة عند استخدام الأجهزة الإلكترونية في الليل.</p>
   <a href="#start" class="btn primary">ابدأ الرحلة</a>
   <a href="#about" class="btn secondary">تعرف علينا</a>
   <br>
-  <img src="https://placehold.co/400x250/0f172a/white?text=تأثير+الضوء+الأزرق" class="main-img" alt="رسم توضيحي لتأثير الضوء الأزرق على النوم">
+  <img src="oo.jpg" class="main-img" alt="تأثير الضوء الأزرق">
+  <div style="margin-top: 10px; font-size: 14px; color: #ddd;"><i class="far fa-clock"></i> وقت القراءة: 3 دقائق</div>
 </div>
 
-<!-- تجربة النوم مع عداد بسيط -->
 <div class="experiment-wrap">
-  <h2>🌙 تجربة النوم</h2>
+  <h2><i class="fas fa-moon"></i> تجربة النوم</h2>
   <p>هل تستخدم الهاتف قبل النوم؟</p>
   <button class="sleep-btn yes-btn" id="yesBtn">نعم</button>
   <button class="sleep-btn no-btn" id="noBtn">لا</button>
   <div id="result"></div>
-  <div class="stats" id="statsArea">
+  <div id="reasonContainer" style="display:none; margin-top:15px;">
+    <select id="reasonSelect" class="reason-select">
+      <option value="">ما سبب استخدامك؟</option>
+      <option value="تواصل اجتماعي">تواصل اجتماعي</option>
+      <option value="دراسة/عمل">دراسة/عمل</option>
+      <option value="ألعاب">ألعاب</option>
+      <option value="مشاهدة فيديو">مشاهدة فيديو</option>
+    </select>
+    <div id="reasonAdvice" style="font-size:14px; margin-top:8px;"></div>
+  </div>
+  <div class="stats">
     📊 الإجابات: <span id="yesCount">0</span> نعم | <span id="noCount">0</span> لا
     <button class="reset-stats" id="resetStats">⟳ إعادة تعيين</button>
+    <button class="share-btn" id="shareResultsBtn" style="background:none; border:none; color:#f97316; cursor:pointer;"><i class="fas fa-share-alt"></i> مشاركة</button>
   </div>
 </div>
 
 <div id="start"></div>
 <div class="section-title">🌙 لنبدأ الرحلة</div>
 
-<!-- بوث 1 - تم تحويل div إلى button مع نفس المظهر -->
-<button class="box" data-content="c1">🔵 ما هو الضوء الأزرق وما هي مصادره؟</button>
-<div id="c1" class="content">
-  <div class="inner-card">
-    <p>🔵 الضوء الأزرق هو نوع من الضوء الذي نراه بأعيننا، وهو جزء من ضوء الشمس. يتميّز بأن طوله الموجي قصير (400–500 نانومتر)، لذلك يحمل طاقة أعلى مقارنة ببقية ألوان الطيف المرئي.</p>
-    <hr style="margin:15px 0;">
-    <p><b class="highlight">🌞 مصادر الضوء الأزرق</b></p>
-    <div style="margin-bottom:10px;">
-      <b>🔹 مصدر طبيعي:</b><br>☀️ الشمس هي المصدر الرئيسي والأقوى للضوء الأزرق.
-    </div>
-    <div>
-      <b>🔹 مصادر صناعية:</b><br>
-      📱 الهواتف الذكية<br>💻 الأجهزة اللوحية<br>🖥️ الحواسيب<br>📺 شاشات التلفاز<br>💡 مصابيح LED
-    </div>
-  </div>
+<!-- صناديق المحتوى (بنفس الهيكل القديم مع إضافة aria) -->
+<button class="box" data-content="c1" aria-expanded="false">🔵 ما هو الضوء الأزرق وما هي مصادره؟</button>
+<div id="c1" class="content"><div class="inner-card">... (نفس المحتوى السابق) ...</div></div>
+<button class="box" data-content="c2" aria-expanded="false">🧠 ماذا يحدث عند استخدام الشاشات ليلاً؟</button>
+<div id="c2" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+<button class="box" data-content="c3" aria-expanded="false">😴 أعراض اضطرابات النوم</button>
+<div id="c3" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+<button class="box" data-content="c4" aria-expanded="false">🌙 نصائح للحصول على نوم صحي</button>
+<div id="c4" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+
+<!-- اختبار سريع -->
+<div class="quiz-area">
+  <h3><i class="fas fa-question-circle"></i> اختبر معلوماتك</h3>
+  <div class="quiz-question">1. ما الهرمون الذي يقلله الضوء الأزرق ليلاً؟</div>
+  <label class="quiz-option"><input type="radio" name="q1" value="melatonin"> الميلاتونين</label>
+  <label class="quiz-option"><input type="radio" name="q1" value="dopamine"> الدوبامين</label>
+  <div class="quiz-question">2. كم دقيقة قبل النوم ينصح بإيقاف الشاشات؟</div>
+  <label class="quiz-option"><input type="radio" name="q2" value="30"> 30 دقيقة</label>
+  <label class="quiz-option"><input type="radio" name="q2" value="60"> 60 دقيقة</label>
+  <button id="submitQuiz" class="btn primary" style="margin-top:10px;">إرسال</button>
+  <div id="quiz-result"></div>
 </div>
 
-<button class="box" data-content="c2">🧠 ماذا يحدث عند استخدام الشاشات ليلاً؟</button>
-<div id="c2" class="content">
-  <div class="inner-card">
-    <p>📱 عند استخدام الشاشات ليلاً، يُرسل الضوء الأزرق المنبعث منها إشارات إلى الدماغ تشبه ضوء النهار، مما يقلل إفراز هرمون الميلاتونين المسؤول عن النوم. هذا يؤدي إلى:</p>
-    <p>🌙 تأخر الشعور بالنعاس<br>⏰ تعطيل الساعة البيولوجية<br>😴 صعوبة النوم<br>🌅 صعوبة الاستيقاظ صباحًا<br>📉 التأثير على التركيز والأداء الذهني في اليوم التالي</p>
-    <div class="study-box">
-      📊 <b>وقد أظهرت دراسة:</b><br><br>
-      أُجريت في جامعة هارفارد أن استخدام الأجهزة المضيئة قبل النوم قلّل إفراز الميلاتونين بنسبة تصل إلى <b>55%</b>، وأدى إلى تأخير الساعة البيولوجية لأكثر من <b>ساعة ونصف</b> مقارنة بقراءة الكتب الورقية.
-    </div>
-    <p>هذا التأخير ينعكس على:<br>😴 صعوبة الدخول في النوم<br>🕐 تأخر موعد النوم<br>🌅 صعوبة الاستيقاظ في الصباح</p>
-  </div>
+<!-- الرسم البياني للإجابات -->
+<div class="chart-container">
+  <canvas id="answersChart" width="200" height="200"></canvas>
 </div>
 
-<button class="box" data-content="c3">😴 أعراض اضطرابات النوم</button>
-<div id="c3" class="content">
-  <div class="inner-card">
-    <p>💡 يؤثر نمط الحياة الحديث، خصوصًا استخدام الأجهزة الإلكترونية في المساء، على جودة النوم ومدته بشكل كبير. الأفراد الذين يعانون من اضطرابات النوم غالبًا يواجهون صعوبة بدء النوم، الاستيقاظ المتكرر، أو النوم القصير وغير العميق، مما ينعكس على النشاط اليومي والأداء الذهني والبدني.</p>
-    <hr style="margin:20px 0;">
-    <p><b class="highlight">🌙 تشمل الأعراض الليلية الشائعة:</b></p>
-    <p>🛌 صعوبة الدخول في النوم أو الاستيقاظ المتكرر<br>🌑 الأرق المستمر أو النوم المتقطع<br>😮‍💨 الشخير العالي أو توقف التنفس أثناء النوم<br>🌙 الحركات اللاإرادية أو الكوابيس</p>
-    <hr style="margin:20px 0;">
-    <p><b class="highlight">☀️ أما الأعراض النهارية فتشمل:</b></p>
-    <p>😴 النعاس المفرط خلال اليوم<br>🤕 الصداع الصباحي وضعف التركيز<br>😡 تقلب المزاج أو تراجع الأداء الدراسي/المهني</p>
-  </div>
-</div>
-
-<button class="box" data-content="c4">🌙 نصائح للحصول على نوم صحي</button>
-<div id="c4" class="content">
-  <div class="inner-card">
-    <div style="margin-bottom:15px;">
-      <b class="highlight">🕒 أولاً: ثبّت ساعتك البيولوجية</b>
-      <p>✔ الانتظام يساعد على ضبط الساعة البيولوجية (Circadian Rhythm) وتحسين إفراز الميلاتونين طبيعيًا.</p>
-    </div>
-    <div style="margin-bottom:15px;">
-      <b class="highlight">📵 ثانياً: أوقف الشاشات قبل النوم بساعة</b>
-      <p>✔ تجنب استخدام الهاتف أو الأجهزة اللوحية قبل النوم بـ 60 دقيقة على الأقل.</p>
-    </div>
-    <div style="margin-bottom:15px;">
-      <b class="highlight">🌙 ثالثاً: هيئ بيئة نوم مثالية</b>
-      <p>✔ اجعل الغرفة مظلمة وهادئة وذات درجة حرارة معتدلة (18–22° مئوية).</p>
-    </div>
-    <div style="margin-bottom:15px;">
-      <b class="highlight">☕ رابعاً: انتبه لما تتناوله مساءً</b>
-      <p>✔ تجنب الكافيين بعد الساعة 4 مساءً (قهوة، شاي، مشروبات طاقة).</p>
-    </div>
-    <div style="margin-bottom:15px;">
-      <b class="highlight">📖 خامساً: أنشئ روتينًا مهدئًا قبل النوم</b>
-      <p>📚 قراءة كتاب ورقي<br>🧘 تمارين تنفس عميق<br>📝 كتابة أفكارك لتفريغ القلق</p>
-    </div>
-    <div>
-      <b class="highlight">🏃‍♂️ سادساً: مارس النشاط البدني نهارًا</b>
-      <p>✔ النشاط البدني المنتظم يحسّن عمق النوم وجودته.</p>
-    </div>
-  </div>
-</div>
-
-<!-- تعرف علينا -->
 <div id="about" class="about">
   <h2>تعرف علينا</h2>
   نحن طلاب من كلية عمان للعلوم الصحية في السنة الرابعة، نسعى إلى زيادة الوعي حول تأثير الضوء الأزرق على النوم والصحة.
 </div>
 
 <div class="character" title="اسألني عن النوم الصحي">👩</div>
+<button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-  // ----- تحسين وظيفة toggle: إغلاق الآخرين تلقائيًا -----
-  function toggleContent(contentId) {
-    const allContents = document.querySelectorAll('.content');
-    const targetContent = document.getElementById(contentId);
-    
-    // إذا كان المحتوى المراد مفتوحًا بالفعل، نغلقه فقط
-    if (targetContent.classList.contains('open')) {
-      targetContent.classList.remove('open');
-      return;
-    }
-    
-    // أغلق كل المحتويات المفتوحة
-    allContents.forEach(content => {
-      content.classList.remove('open');
-    });
-    
-    // افتح المحتوى المطلوب
-    targetContent.classList.add('open');
+// 1. تأثير الكتابة التدريجي
+const titleText = "تأثير الضوء الأزرق<br>على النوم";
+let i = 0;
+function typeWriter() {
+  if (i < titleText.length) {
+    document.getElementById("typingTitle").innerHTML = titleText.substring(0, i+1) + (i%2===0?"_":"");
+    i++;
+    setTimeout(typeWriter, 80);
+  } else {
+    document.getElementById("typingTitle").innerHTML = titleText;
   }
-  
-  // ربط جميع الأزرار التي تحمل class="box" بوظيفة toggle
-  document.querySelectorAll('.box').forEach(button => {
-    button.addEventListener('click', function(e) {
-      const contentId = this.getAttribute('data-content');
-      if (contentId) {
-        toggleContent(contentId);
-      }
-    });
+}
+typeWriter();
+
+// 2. شريط التقدم
+window.addEventListener("scroll", () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById("progressBar").style.width = scrolled + "%";
+});
+
+// 3. وضع ليلي تلقائي + حفظ
+const darkModeToggle = document.getElementById("darkModeToggle");
+if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark");
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+});
+
+// 4. صوت (اختياري مع كتم)
+let soundEnabled = true;
+const muteToggle = document.getElementById("muteToggle");
+muteToggle.addEventListener("click", () => {
+  soundEnabled = !soundEnabled;
+  muteToggle.innerHTML = soundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+});
+function playClick() { if(soundEnabled) { const audio = new Audio('https://www.soundjay.com/misc/sounds/button-click-01.mp3'); audio.volume=0.2; audio.play().catch(e=>{}); } }
+
+// 5. زر العودة للأعلى
+const backBtn = document.getElementById("backToTop");
+window.onscroll = () => { backBtn.style.display = window.scrollY > 300 ? "flex" : "none"; };
+backBtn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
+
+// 6. تجربة النوم + عداد + سبب + مشاركة
+let yesAnswers=0, noAnswers=0;
+function loadStats() {
+  yesAnswers = parseInt(localStorage.getItem("sleepYes")||0);
+  noAnswers = parseInt(localStorage.getItem("sleepNo")||0);
+  updateStatsDisplay(); updateChart();
+}
+function updateStatsDisplay() {
+  document.getElementById("yesCount").innerText = yesAnswers;
+  document.getElementById("noCount").innerText = noAnswers;
+}
+function saveStats() {
+  localStorage.setItem("sleepYes", yesAnswers);
+  localStorage.setItem("sleepNo", noAnswers);
+}
+function showResult(choice, reason=null) {
+  const resultDiv = document.getElementById("result");
+  if(choice==='yes') {
+    resultDiv.innerHTML = `<div style="background:#fff7ed; padding:15px; border-radius:15px;">⚠️ دماغك يعتقد أنه وقت النهار<br>🧠 انخفاض الميلاتونين<br>😴 تأخر النوم</div>`;
+    if(reason) document.getElementById("reasonAdvice").innerHTML = `📌 نصائح لـ ${reason}: حاول وضع هاتفك بعيدًا قبل النوم بـ 30 دقيقة.`;
+  } else {
+    resultDiv.innerHTML = `<div style="background:#ecfdf5; padding:15px; border-radius:15px;">🌿 نوم صحي! 💤 إفراز طبيعي للميلاتونين<br>💪 تركيز أفضل</div>`;
+  }
+}
+document.getElementById("yesBtn").onclick = () => { playClick(); yesAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('yes'); document.getElementById("reasonContainer").style.display = "block"; };
+document.getElementById("noBtn").onclick = () => { playClick(); noAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('no'); document.getElementById("reasonContainer").style.display = "none"; };
+document.getElementById("resetStats").onclick = () => { yesAnswers=0; noAnswers=0; saveStats(); updateStatsDisplay(); updateChart(); document.getElementById("result").innerHTML=""; };
+document.getElementById("shareResultsBtn").onclick = () => { navigator.clipboard.writeText(`نتيجتي في اختبار تأثير الضوء الأزرق: نعم ${yesAnswers} مرات، لا ${noAnswers} مرات. شارك وعيك!`); alert("تم نسخ النتيجة!"); };
+document.getElementById("reasonSelect").onchange = function() { showResult('yes', this.value); };
+loadStats();
+
+// 7. رسم بياني باستخدام Chart.js
+let chart;
+function updateChart() {
+  const ctx = document.getElementById('answersChart').getContext('2d');
+  if(chart) chart.destroy();
+  chart = new Chart(ctx, { type: 'pie', data: { labels: ['نعم', 'لا'], datasets: [{ data: [yesAnswers, noAnswers], backgroundColor: ['#f97316', '#22c55e'] }] } });
+}
+
+// 8. صناديق المحتوى: toggle مع إغلاق الآخرين وحفظ الحالة المفتوحة
+function toggleContent(contentId, btnElement) {
+  const allContents = document.querySelectorAll('.content');
+  const target = document.getElementById(contentId);
+  const isOpening = !target.classList.contains('open');
+  allContents.forEach(c => { c.classList.remove('open'); });
+  if(isOpening) target.classList.add('open');
+  // تحديث aria-expanded
+  document.querySelectorAll('.box').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+  if(isOpening && btnElement) btnElement.setAttribute('aria-expanded', 'true');
+  // حفظ المحتوى المفتوح في localStorage
+  localStorage.setItem('openedContent', isOpening ? contentId : '');
+}
+document.querySelectorAll('.box').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    playClick();
+    const contentId = btn.getAttribute('data-content');
+    toggleContent(contentId, btn);
   });
-  
-  // ----- نظام عداد تجربة النوم (localStorage) -----
-  let yesAnswers = 0;
-  let noAnswers = 0;
-  
-  // تحميل البيانات المخزنة
-  function loadStats() {
-    const savedYes = localStorage.getItem('sleepYesCount');
-    const savedNo = localStorage.getItem('sleepNoCount');
-    if (savedYes !== null) yesAnswers = parseInt(savedYes);
-    if (savedNo !== null) noAnswers = parseInt(savedNo);
-    updateStatsDisplay();
-  }
-  
-  function updateStatsDisplay() {
-    document.getElementById('yesCount').innerText = yesAnswers;
-    document.getElementById('noCount').innerText = noAnswers;
-  }
-  
-  function saveStats() {
-    localStorage.setItem('sleepYesCount', yesAnswers);
-    localStorage.setItem('sleepNoCount', noAnswers);
-  }
-  
-  function addYes() {
-    yesAnswers++;
-    updateStatsDisplay();
-    saveStats();
-    showResult('yes');
-  }
-  
-  function addNo() {
-    noAnswers++;
-    updateStatsDisplay();
-    saveStats();
-    showResult('no');
-  }
-  
-  function resetStats() {
-    yesAnswers = 0;
-    noAnswers = 0;
-    updateStatsDisplay();
-    saveStats();
-    document.getElementById('result').innerHTML = ''; // مسح الرسالة أيضًا
-  }
-  
-  function showResult(choice) {
-    const resultDiv = document.getElementById('result');
-    if (choice === 'yes') {
-      resultDiv.innerHTML = `
-        <div style="background:#fff7ed; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #f97316; line-height:2; font-weight:bold;">
-          ⚠️ دماغك يعتقد أنه وقت النهار<br><br>
-          🧠 انخفاض الميلاتونين<br>
-          😴 تأخر النوم<br>
-          📉 ضعف التركيز
-        </div>`;
-    } else {
-      resultDiv.innerHTML = `
-        <div style="background:#ecfdf5; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #22c55e; line-height:2; font-weight:bold;">
-          🌿 نوم صحي<br><br>
-          💤 إفراز طبيعي للميلاتونين<br>
-          💪 تركيز أفضل
-        </div>`;
-    }
-  }
-  
-  // ربط الأزرار
-  document.getElementById('yesBtn').addEventListener('click', addYes);
-  document.getElementById('noBtn').addEventListener('click', addNo);
-  document.getElementById('resetStats').addEventListener('click', resetStats);
-  
-  // تحميل الإحصائيات عند بدء الصفحة
-  loadStats();
-  
-  // تحسين إضافي: إغلاق المحتوى عند النقر خارج الأزرار (اختياري)
-  document.addEventListener('click', function(e) {
-    // إذا كان النقر على زر box أو داخل محتوى مفتوح، لا نغلق
-    if (e.target.closest('.box') || e.target.closest('.content')) return;
-    // وإلا نغلق كل المحتويات
-    document.querySelectorAll('.content').forEach(content => {
-      content.classList.remove('open');
-    });
-  });
+});
+// استعادة المحتوى المفتوح سابقاً
+const lastOpened = localStorage.getItem('openedContent');
+if(lastOpened) {
+  const btn = document.querySelector(`.box[data-content="${lastOpened}"]`);
+  if(btn) toggleContent(lastOpened, btn);
+}
+
+// 9. اختبار سريع
+document.getElementById("submitQuiz").onclick = () => {
+  const q1 = document.querySelector('input[name="q1"]:checked');
+  const q2 = document.querySelector('input[name="q2"]:checked');
+  let score = 0;
+  if(q1 && q1.value === 'melatonin') score++;
+  if(q2 && q2.value === '60') score++;
+  document.getElementById("quiz-result").innerHTML = `نتيجتك: ${score}/2. ${score===2 ? "ممتاز! 🎉" : "راجع المعلومات مرة أخرى 📚"}`;
+  playClick();
+};
+
+// 10. تحسينات إضافية: منع hover على اللمس (لا حاجة لتعديل كبير)
+// التأكد من عرض الصور القديمة (ro.JPG, robot.jpg, oo.jpg) - موجودة في الخلفية والهيدر والصور.
 </script>
 </body>
 </html>

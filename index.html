@@ -3,685 +3,536 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تأثير الضوء الأزرق على النوم</title>
 <style>
-
-body{
-
-  margin:0;
-
-  font-family:"Segoe UI", Tahoma, Arial, sans-serif;
-
-  direction:rtl;
-
-  background: url("ro.JPG") no-repeat center center fixed;
-
-  background-size: cover;
-
-  position:relative;
-
-}
-
-/* طبقة غامقة فوق الصورة */
-
-body::before{
-
-  content:"";
-
-  position:fixed;
-
-  top:0;
-
-  left:0;
-
-  width:100%;
-
-  height:100%;
-
-  background:rgba(0,0,0,0.45);
-
-  z-index:-1;
-
-}
-
-/* الهيدر */
-
-.header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:15px 20px;
-
-  border-bottom:3px solid #1e293b;
-
-  background:white;
-
-  font-weight:bold;
-
-}
-
-.logo{
-
-  width:45px;
-
-  border-radius:12px;
-
-}
-
-/* الصفحة الرئيسية */
-
-.top{
-
-  text-align:center;
-
-  padding:70px 20px;
-
-  background:rgba(0,0,0,0.35);
-
-  color:white;
-
-}
-
-.badge{
-
-  background:#84cc16;
-
-  color:black;
-
-  padding:8px 20px;
-
-  border-radius:20px;
-
-  display:inline-block;
-
-  margin-bottom:20px;
-
-}
-
-h1{
-
-  font-size:36px;
-
-  margin:10px 0;
-
-  color:white;
-
-}
-
-.top p{
-
-  color:#f8fafc;
-
-  line-height:2;
-
-  max-width:850px;
-
-  margin:0 auto 15px;
-
-}
-
-/* الأزرار */
-
-.btn{
-
-  padding:12px 25px;
-
-  border-radius:25px;
-
-  margin:10px;
-
-  text-decoration:none;
-
-  font-weight:bold;
-
-  display:inline-block;
-
-}
-
-.primary{
-
-  background:white;
-
-  color:#6b21a8;
-
-}
-
-.secondary{
-
-  border:2px solid white;
-
-  color:white;
-
-}
-
-/* صورة */
-
-.main-img{
-
-  width:300px;
-
-  max-width:90%;
-
-  border-radius:20px;
-
-  margin-top:20px;
-
-}
-
-/* عنوان القسم */
-
-.section-title{
-
-  text-align:center;
-
-  font-size:24px;
-
-  margin:40px 0 20px;
-
-  color:white;
-
-}
-
-/* تجربة النوم */
-
-.experiment-wrap{
-
-  text-align:center;
-
-  margin:40px auto;
-
-  width:350px;
-
-  max-width:90%;
-
-  background:rgba(255,255,255,0.96);
-
-  border:3px solid #1e293b;
-
-  box-shadow:8px 8px 0px #1e293b;
-
-  border-radius:20px;
-
-  padding:20px;
-
-}
-
-.experiment-wrap h2{
-
-  margin-top:0;
-
-  color:#1e293b;
-
-}
-
-.experiment-wrap p{
-
-  color:#1e293b;
-
-  font-weight:600;
-
-}
-
-.sleep-btn{
-
-  padding:10px 20px;
-
-  margin:10px;
-
-  border:none;
-
-  border-radius:12px;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
-  font-size:16px;
-
-}
-
-.yes-btn{
-
-  background:#f97316;
-
-  color:white;
-
-}
-
-.no-btn{
-
-  background:#22c55e;
-
-  color:white;
-
-}
-
-#result{
-
-  margin-top:20px;
-
-}
-
-/* الأسئلة */
-
-.box{
-
-  background:white;
-
-  color:#1e293b;
-
-  margin:20px auto;
-
-  padding:18px;
-
-  width:350px;
-
-  max-width:90%;
-
-  border-radius:20px;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
-  border:3px solid #1e293b;
-
-  box-shadow:8px 8px 0px #1e293b;
-
-  transition:0.2s;
-
-  line-height:1.8;
-
-}
-
-.box:hover{
-
-  transform:translateY(-5px);
-
-}
-
-/* المحتوى */
-
-.content{
-
-  display:none;
-
-  width:350px;
-
-  max-width:90%;
-
-  margin:0 auto 20px;
-
-}
-
-.content.open{
-
-  display:block;
-
-}
-
-.inner-card{
-
-  background:rgba(255,255,255,0.97);
-
-  color:#0f172a;
-
-  padding:20px;
-
-  border-radius:20px;
-
-  border:3px solid #1e293b;
-
-  box-shadow:8px 8px 0px #1e293b;
-
-  line-height:2;
-
-}
-
-.inner-card p,
-
-.inner-card div,
-
-.inner-card li{
-
-  color:#0f172a;
-
-}
-
-.highlight{
-
-  color:#7c3aed;
-
-  font-weight:bold;
-
-}
-
-.study-box{
-
-  background:#f8fafc;
-
-  padding:15px;
-
-  border-radius:12px;
-
-  margin:20px 0;
-
-  border-right:5px solid #a855f7;
-
-  color:#1e293b;
-
-}
-
-/* تعريف */
-
-.about{
-
-  background:rgba(255,255,255,0.97);
-
-  margin:40px auto;
-
-  padding:30px;
-
-  width:350px;
-
-  max-width:90%;
-
-  border-radius:25px;
-
-  border:3px solid #1e293b;
-
-  box-shadow:8px 8px 0px #1e293b;
-
-  text-align:center;
-
-  line-height:2;
-
-  color:#0f172a;
-
-}
-
-/* شخصية */
-
-.character{
-
-  position:fixed;
-
-  bottom:20px;
-
-  left:20px;
-
-  width:60px;
-
-  height:60px;
-
-  background:#ede9fe;
-
-  border-radius:50%;
-
-  border:3px solid #1e293b;
-
-  box-shadow:5px 5px 0px #1e293b;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:25px;
-
-}
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    direction: rtl;
+    background: url("https://placehold.co/1920x1080/1e293b/white?text=خلفية+طبية") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+  }
+
+  /* طبقة غامقة فوق الخلفية - تحسين z-index */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+  }
+
+  /* جميع المحتويات تكون فوق الطبقة الغامقة */
+  .header, .top, .experiment-wrap, .box, .about, .character, .section-title, .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* الهيدر */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 3px solid #1e293b;
+    background: white;
+    font-weight: bold;
+  }
+
+  .logo {
+    width: 45px;
+    border-radius: 12px;
+  }
+
+  /* الصفحة الرئيسية */
+  .top {
+    text-align: center;
+    padding: 70px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+
+  .badge {
+    background: #84cc16;
+    color: black;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin: 10px 0;
+    color: white;
+  }
+
+  .top p {
+    color: #f8fafc;
+    line-height: 2;
+    max-width: 850px;
+    margin: 0 auto 15px;
+  }
+
+  /* الأزرار */
+  .btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .btn:hover {
+    transform: translateY(-3px);
+  }
+
+  .primary {
+    background: white;
+    color: #6b21a8;
+  }
+  .primary:hover {
+    background: #f3e8ff;
+  }
+
+  .secondary {
+    border: 2px solid white;
+    color: white;
+  }
+  .secondary:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* صورة */
+  .main-img {
+    width: 300px;
+    max-width: 90%;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  /* عنوان القسم */
+  .section-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 40px 0 20px;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+  }
+
+  /* تجربة النوم */
+  .experiment-wrap {
+    text-align: center;
+    margin: 40px auto;
+    width: 350px;
+    max-width: 90%;
+    background: rgba(255, 255, 255, 0.98);
+    border: 3px solid #1e293b;
+    box-shadow: 8px 8px 0px #1e293b;
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .experiment-wrap h2 {
+    margin-top: 0;
+    color: #1e293b;
+  }
+
+  .experiment-wrap p {
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  .sleep-btn {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100px;
+    transition: transform 0.2s, filter 0.2s;
+  }
+  .sleep-btn:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+  }
+
+  .yes-btn {
+    background: #f97316;
+    color: white;
+  }
+
+  .no-btn {
+    background: #22c55e;
+    color: white;
+  }
+
+  #result {
+    margin-top: 20px;
+  }
+
+  /* صناديق الأسئلة - تحويلها إلى أزرار مع الحفاظ على المظهر */
+  .box {
+    background: white;
+    color: #1e293b;
+    margin: 20px auto;
+    padding: 18px;
+    width: 350px;
+    max-width: 90%;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 3px solid #1e293b;
+    box-shadow: 8px 8px 0px #1e293b;
+    transition: 0.2s;
+    line-height: 1.8;
+    text-align: center;
+    display: block;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: white;
+  }
+  .box:hover {
+    transform: translateY(-5px);
+    background-color: #f8fafc;
+  }
+
+  /* المحتوى القابل للطي */
+  .content {
+    display: none;
+    width: 350px;
+    max-width: 90%;
+    margin: 0 auto 20px;
+  }
+
+  .content.open {
+    display: block;
+  }
+
+  .inner-card {
+    background: rgba(255, 255, 255, 0.97);
+    color: #0f172a;
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid #1e293b;
+    box-shadow: 8px 8px 0px #1e293b;
+    line-height: 2;
+  }
+
+  .inner-card p,
+  .inner-card div,
+  .inner-card li {
+    color: #0f172a;
+  }
+
+  .highlight {
+    color: #7c3aed;
+    font-weight: bold;
+  }
+
+  .study-box {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-right: 5px solid #a855f7;
+    color: #1e293b;
+  }
+
+  /* تعريف */
+  .about {
+    background: rgba(255, 255, 255, 0.97);
+    margin: 40px auto;
+    padding: 30px;
+    width: 350px;
+    max-width: 90%;
+    border-radius: 25px;
+    border: 3px solid #1e293b;
+    box-shadow: 8px 8px 0px #1e293b;
+    text-align: center;
+    line-height: 2;
+    color: #0f172a;
+  }
+
+  /* شخصية ثابتة */
+  .character {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: #ede9fe;
+    border-radius: 50%;
+    border: 3px solid #1e293b;
+    box-shadow: 5px 5px 0px #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: help;
+    z-index: 10;
+  }
+  /* عداد التجربة */
+  .stats {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    background: #e2e8f0;
+    padding: 8px;
+    border-radius: 30px;
+    color: #0f172a;
+  }
+  .reset-stats {
+    background: none;
+    border: none;
+    color: #f97316;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+  }
 </style>
 </head>
 <body>
-<!-- الهيدر -->
+
 <div class="header">
-<img src="robot.jpg" class="logo" alt="logo">
+  <img src="https://placehold.co/60x60/6b21a8/white?text=LOGO" class="logo" alt="شعار المشروع - تأثير الضوء الأزرق">
+  <span>🌙 وعي رقمي</span>
 </div>
-<!-- الصفحة الرئيسية -->
+
 <div class="top">
-<div class="badge">✨ مرحبا بكم</div>
-<h1>تأثير الضوء الأزرق<br>على النوم</h1>
-<p>
-
+  <div class="badge">✨ مرحبا بكم</div>
+  <h1>تأثير الضوء الأزرق<br>على النوم</h1>
+  <p>
     نتعرف في هذا المشروع على تأثير الضوء الأزرق على النوم والصحة،
-
     خاصة عند استخدام الأجهزة الإلكترونية في الليل.
-</p>
-<a href="#start" class="btn primary">ابدأ الرحلة</a>
-<a href="#about" class="btn secondary">تعرف علينا</a>
-<br>
-<img src="oo.jpg" class="main-img" alt="report">
+  </p>
+  <a href="#start" class="btn primary">ابدأ الرحلة</a>
+  <a href="#about" class="btn secondary">تعرف علينا</a>
+  <br>
+  <img src="https://placehold.co/400x250/0f172a/white?text=تأثير+الضوء+الأزرق" class="main-img" alt="رسم توضيحي لتأثير الضوء الأزرق على النوم">
 </div>
-<!-- تجربة النوم -->
+
+<!-- تجربة النوم مع عداد بسيط -->
 <div class="experiment-wrap">
-<h2>🌙 تجربة النوم</h2>
-<p>هل تستخدم الهاتف قبل النوم؟</p>
-<button onclick="bad()" class="sleep-btn yes-btn">نعم</button>
-<button onclick="good()" class="sleep-btn no-btn">لا</button>
-<div id="result"></div>
+  <h2>🌙 تجربة النوم</h2>
+  <p>هل تستخدم الهاتف قبل النوم؟</p>
+  <button class="sleep-btn yes-btn" id="yesBtn">نعم</button>
+  <button class="sleep-btn no-btn" id="noBtn">لا</button>
+  <div id="result"></div>
+  <div class="stats" id="statsArea">
+    📊 الإجابات: <span id="yesCount">0</span> نعم | <span id="noCount">0</span> لا
+    <button class="reset-stats" id="resetStats">⟳ إعادة تعيين</button>
+  </div>
 </div>
+
 <div id="start"></div>
 <div class="section-title">🌙 لنبدأ الرحلة</div>
-<!-- بوث 1 -->
-<div class="box" onclick="toggle('c1')">
 
-  🔵 ما هو الضوء الأزرق وما هي مصادره؟
-</div>
+<!-- بوث 1 - تم تحويل div إلى button مع نفس المظهر -->
+<button class="box" data-content="c1">🔵 ما هو الضوء الأزرق وما هي مصادره؟</button>
 <div id="c1" class="content">
-<div class="inner-card">
-<p>
-
-      🔵 الضوء الأزرق هو نوع من الضوء الذي نراه بأعيننا، وهو جزء من ضوء الشمس. يتميّز بأن طوله الموجي قصير (400–500 نانومتر)، لذلك يحمل طاقة أعلى مقارنة ببقية ألوان الطيف المرئي.
-</p>
-<hr style="margin:15px 0;">
-<p><b class="highlight">🌞 مصادر الضوء الأزرق</b></p>
-<div style="margin-bottom:10px;">
-<b>🔹 مصدر طبيعي:</b><br>
-
-      ☀️ الشمس هي المصدر الرئيسي والأقوى للضوء الأزرق.
+  <div class="inner-card">
+    <p>🔵 الضوء الأزرق هو نوع من الضوء الذي نراه بأعيننا، وهو جزء من ضوء الشمس. يتميّز بأن طوله الموجي قصير (400–500 نانومتر)، لذلك يحمل طاقة أعلى مقارنة ببقية ألوان الطيف المرئي.</p>
+    <hr style="margin:15px 0;">
+    <p><b class="highlight">🌞 مصادر الضوء الأزرق</b></p>
+    <div style="margin-bottom:10px;">
+      <b>🔹 مصدر طبيعي:</b><br>☀️ الشمس هي المصدر الرئيسي والأقوى للضوء الأزرق.
+    </div>
+    <div>
+      <b>🔹 مصادر صناعية:</b><br>
+      📱 الهواتف الذكية<br>💻 الأجهزة اللوحية<br>🖥️ الحواسيب<br>📺 شاشات التلفاز<br>💡 مصابيح LED
+    </div>
+  </div>
 </div>
-<div>
-<b>🔹 مصادر صناعية:</b><br>
 
-      📱 الهواتف الذكية<br>
-
-      💻 الأجهزة اللوحية<br>
-
-      🖥️ الحواسيب<br>
-
-      📺 شاشات التلفاز<br>
-
-      💡 مصابيح LED
-</div>
-</div>
-</div>
-<!-- بوث 2 -->
-<div class="box" onclick="toggle('c2')">
-
-  🧠 ماذا يحدث عند استخدام الشاشات ليلاً؟
-</div>
+<button class="box" data-content="c2">🧠 ماذا يحدث عند استخدام الشاشات ليلاً؟</button>
 <div id="c2" class="content">
-<div class="inner-card">
-<p>
-
-      📱 عند استخدام الشاشات ليلاً، يُرسل الضوء الأزرق المنبعث منها إشارات إلى الدماغ تشبه ضوء النهار، مما يقلل إفراز هرمون الميلاتونين المسؤول عن النوم. هذا يؤدي إلى:
-</p>
-<p>
-
-      🌙 تأخر الشعور بالنعاس<br>
-
-      ⏰ تعطيل الساعة البيولوجية<br>
-
-      😴 صعوبة النوم<br>
-
-      🌅 صعوبة الاستيقاظ صباحًا<br>
-
-      📉 التأثير على التركيز والأداء الذهني في اليوم التالي
-</p>
-<div class="study-box">
-
+  <div class="inner-card">
+    <p>📱 عند استخدام الشاشات ليلاً، يُرسل الضوء الأزرق المنبعث منها إشارات إلى الدماغ تشبه ضوء النهار، مما يقلل إفراز هرمون الميلاتونين المسؤول عن النوم. هذا يؤدي إلى:</p>
+    <p>🌙 تأخر الشعور بالنعاس<br>⏰ تعطيل الساعة البيولوجية<br>😴 صعوبة النوم<br>🌅 صعوبة الاستيقاظ صباحًا<br>📉 التأثير على التركيز والأداء الذهني في اليوم التالي</p>
+    <div class="study-box">
       📊 <b>وقد أظهرت دراسة:</b><br><br>
-
       أُجريت في جامعة هارفارد أن استخدام الأجهزة المضيئة قبل النوم قلّل إفراز الميلاتونين بنسبة تصل إلى <b>55%</b>، وأدى إلى تأخير الساعة البيولوجية لأكثر من <b>ساعة ونصف</b> مقارنة بقراءة الكتب الورقية.
+    </div>
+    <p>هذا التأخير ينعكس على:<br>😴 صعوبة الدخول في النوم<br>🕐 تأخر موعد النوم<br>🌅 صعوبة الاستيقاظ في الصباح</p>
+  </div>
 </div>
-<p>
 
-      هذا التأخير ينعكس على:
-</p>
-<p>
-
-      😴 صعوبة الدخول في النوم<br>
-
-      🕐 تأخر موعد النوم<br>
-
-      🌅 صعوبة الاستيقاظ في الصباح
-</p>
-</div>
-</div>
-<!-- بوث 3 -->
-<div class="box" onclick="toggle('c3')">
-
-  😴 أعراض اضطرابات النوم
-</div>
+<button class="box" data-content="c3">😴 أعراض اضطرابات النوم</button>
 <div id="c3" class="content">
-<div class="inner-card">
-<p>
-
-      💡 يؤثر نمط الحياة الحديث، خصوصًا استخدام الأجهزة الإلكترونية في المساء، على جودة النوم ومدته بشكل كبير.
-
-      الأفراد الذين يعانون من اضطرابات النوم غالبًا يواجهون صعوبة بدء النوم، الاستيقاظ المتكرر، أو النوم القصير وغير العميق، مما ينعكس على النشاط اليومي والأداء الذهني والبدني.
-</p>
-<hr style="margin:20px 0;">
-<p><b class="highlight">🌙 تشمل الأعراض الليلية الشائعة:</b></p>
-<p>
-
-      🛌 صعوبة الدخول في النوم أو الاستيقاظ المتكرر<br>
-
-      🌑 الأرق المستمر أو النوم المتقطع<br>
-
-      😮‍💨 الشخير العالي أو توقف التنفس أثناء النوم<br>
-
-      🌙 الحركات اللاإرادية أو الكوابيس
-</p>
-<hr style="margin:20px 0;">
-<p><b class="highlight">☀️ أما الأعراض النهارية فتشمل:</b></p>
-<p>
-
-      😴 النعاس المفرط خلال اليوم<br>
-
-      🤕 الصداع الصباحي وضعف التركيز<br>
-
-      😡 تقلب المزاج أو تراجع الأداء الدراسي/المهني
-</p>
+  <div class="inner-card">
+    <p>💡 يؤثر نمط الحياة الحديث، خصوصًا استخدام الأجهزة الإلكترونية في المساء، على جودة النوم ومدته بشكل كبير. الأفراد الذين يعانون من اضطرابات النوم غالبًا يواجهون صعوبة بدء النوم، الاستيقاظ المتكرر، أو النوم القصير وغير العميق، مما ينعكس على النشاط اليومي والأداء الذهني والبدني.</p>
+    <hr style="margin:20px 0;">
+    <p><b class="highlight">🌙 تشمل الأعراض الليلية الشائعة:</b></p>
+    <p>🛌 صعوبة الدخول في النوم أو الاستيقاظ المتكرر<br>🌑 الأرق المستمر أو النوم المتقطع<br>😮‍💨 الشخير العالي أو توقف التنفس أثناء النوم<br>🌙 الحركات اللاإرادية أو الكوابيس</p>
+    <hr style="margin:20px 0;">
+    <p><b class="highlight">☀️ أما الأعراض النهارية فتشمل:</b></p>
+    <p>😴 النعاس المفرط خلال اليوم<br>🤕 الصداع الصباحي وضعف التركيز<br>😡 تقلب المزاج أو تراجع الأداء الدراسي/المهني</p>
+  </div>
 </div>
-</div>
-<!-- بوث 4 -->
-<div class="box" onclick="toggle('c4')">
 
-  🌙 نصائح للحصول على نوم صحي
-</div>
+<button class="box" data-content="c4">🌙 نصائح للحصول على نوم صحي</button>
 <div id="c4" class="content">
-<div class="inner-card">
-<div style="margin-bottom:15px;">
-<b class="highlight">🕒 أولاً: ثبّت ساعتك البيولوجية</b>
-<p>
-
-        ✔ الانتظام يساعد على ضبط الساعة البيولوجية (Circadian Rhythm) وتحسين إفراز الميلاتونين طبيعيًا.
-</p>
+  <div class="inner-card">
+    <div style="margin-bottom:15px;">
+      <b class="highlight">🕒 أولاً: ثبّت ساعتك البيولوجية</b>
+      <p>✔ الانتظام يساعد على ضبط الساعة البيولوجية (Circadian Rhythm) وتحسين إفراز الميلاتونين طبيعيًا.</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">📵 ثانياً: أوقف الشاشات قبل النوم بساعة</b>
+      <p>✔ تجنب استخدام الهاتف أو الأجهزة اللوحية قبل النوم بـ 60 دقيقة على الأقل.</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">🌙 ثالثاً: هيئ بيئة نوم مثالية</b>
+      <p>✔ اجعل الغرفة مظلمة وهادئة وذات درجة حرارة معتدلة (18–22° مئوية).</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">☕ رابعاً: انتبه لما تتناوله مساءً</b>
+      <p>✔ تجنب الكافيين بعد الساعة 4 مساءً (قهوة، شاي، مشروبات طاقة).</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">📖 خامساً: أنشئ روتينًا مهدئًا قبل النوم</b>
+      <p>📚 قراءة كتاب ورقي<br>🧘 تمارين تنفس عميق<br>📝 كتابة أفكارك لتفريغ القلق</p>
+    </div>
+    <div>
+      <b class="highlight">🏃‍♂️ سادساً: مارس النشاط البدني نهارًا</b>
+      <p>✔ النشاط البدني المنتظم يحسّن عمق النوم وجودته.</p>
+    </div>
+  </div>
 </div>
-<div style="margin-bottom:15px;">
-<b class="highlight">📵 ثانياً: أوقف الشاشات قبل النوم بساعة</b>
-<p>
 
-        ✔ تجنب استخدام الهاتف أو الأجهزة اللوحية قبل النوم بـ 60 دقيقة على الأقل.
-</p>
-</div>
-<div style="margin-bottom:15px;">
-<b class="highlight">🌙 ثالثاً: هيئ بيئة نوم مثالية</b>
-<p>
-
-        ✔ اجعل الغرفة مظلمة وهادئة وذات درجة حرارة معتدلة (18–22° مئوية).
-</p>
-</div>
-<div style="margin-bottom:15px;">
-<b class="highlight">☕ رابعاً: انتبه لما تتناوله مساءً</b>
-<p>
-
-        ✔ تجنب الكافيين بعد الساعة 4 مساءً (قهوة، شاي، مشروبات طاقة).
-</p>
-</div>
-<div style="margin-bottom:15px;">
-<b class="highlight">📖 خامساً: أنشئ روتينًا مهدئًا قبل النوم</b>
-<p>
-
-        📚 قراءة كتاب ورقي<br>
-
-        🧘 تمارين تنفس عميق<br>
-
-        📝 كتابة أفكارك لتفريغ القلق
-</p>
-</div>
-<div>
-<b class="highlight">🏃‍♂️ سادساً: مارس النشاط البدني نهارًا</b>
-<p>
-
-        ✔ النشاط البدني المنتظم يحسّن عمق النوم وجودته.
-</p>
-</div>
-</div>
-</div>
 <!-- تعرف علينا -->
 <div id="about" class="about">
-<h2>تعرف علينا</h2>
-
+  <h2>تعرف علينا</h2>
   نحن طلاب من كلية عمان للعلوم الصحية في السنة الرابعة، نسعى إلى زيادة الوعي حول تأثير الضوء الأزرق على النوم والصحة.
 </div>
-<!-- الشخصية -->
-<div class="character">👩</div>
+
+<div class="character" title="اسألني عن النوم الصحي">👩</div>
+
 <script>
-
-function toggle(id){
-
-  var x = document.getElementById(id);
-
-  x.classList.toggle("open");
-
-}
-
-function bad(){
-
-  document.getElementById("result").innerHTML = `
-<div style="background:#fff7ed; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #f97316; line-height:2; font-weight:bold;">
-
-      ⚠️ دماغك يعتقد أنه وقت النهار<br><br>
-
-      🧠 انخفاض الميلاتونين<br>
-
-      😴 تأخر النوم<br>
-
-      📉 ضعف التركيز
-</div>`;
-
-}
-
-function good(){
-
-  document.getElementById("result").innerHTML = `
-<div style="background:#ecfdf5; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #22c55e; line-height:2; font-weight:bold;">
-
-      🌿 نوم صحي<br><br>
-
-      💤 إفراز طبيعي للميلاتونين<br>
-
-      💪 تركيز أفضل
-</div>`;
-
-}
+  // ----- تحسين وظيفة toggle: إغلاق الآخرين تلقائيًا -----
+  function toggleContent(contentId) {
+    const allContents = document.querySelectorAll('.content');
+    const targetContent = document.getElementById(contentId);
+    
+    // إذا كان المحتوى المراد مفتوحًا بالفعل، نغلقه فقط
+    if (targetContent.classList.contains('open')) {
+      targetContent.classList.remove('open');
+      return;
+    }
+    
+    // أغلق كل المحتويات المفتوحة
+    allContents.forEach(content => {
+      content.classList.remove('open');
+    });
+    
+    // افتح المحتوى المطلوب
+    targetContent.classList.add('open');
+  }
+  
+  // ربط جميع الأزرار التي تحمل class="box" بوظيفة toggle
+  document.querySelectorAll('.box').forEach(button => {
+    button.addEventListener('click', function(e) {
+      const contentId = this.getAttribute('data-content');
+      if (contentId) {
+        toggleContent(contentId);
+      }
+    });
+  });
+  
+  // ----- نظام عداد تجربة النوم (localStorage) -----
+  let yesAnswers = 0;
+  let noAnswers = 0;
+  
+  // تحميل البيانات المخزنة
+  function loadStats() {
+    const savedYes = localStorage.getItem('sleepYesCount');
+    const savedNo = localStorage.getItem('sleepNoCount');
+    if (savedYes !== null) yesAnswers = parseInt(savedYes);
+    if (savedNo !== null) noAnswers = parseInt(savedNo);
+    updateStatsDisplay();
+  }
+  
+  function updateStatsDisplay() {
+    document.getElementById('yesCount').innerText = yesAnswers;
+    document.getElementById('noCount').innerText = noAnswers;
+  }
+  
+  function saveStats() {
+    localStorage.setItem('sleepYesCount', yesAnswers);
+    localStorage.setItem('sleepNoCount', noAnswers);
+  }
+  
+  function addYes() {
+    yesAnswers++;
+    updateStatsDisplay();
+    saveStats();
+    showResult('yes');
+  }
+  
+  function addNo() {
+    noAnswers++;
+    updateStatsDisplay();
+    saveStats();
+    showResult('no');
+  }
+  
+  function resetStats() {
+    yesAnswers = 0;
+    noAnswers = 0;
+    updateStatsDisplay();
+    saveStats();
+    document.getElementById('result').innerHTML = ''; // مسح الرسالة أيضًا
+  }
+  
+  function showResult(choice) {
+    const resultDiv = document.getElementById('result');
+    if (choice === 'yes') {
+      resultDiv.innerHTML = `
+        <div style="background:#fff7ed; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #f97316; line-height:2; font-weight:bold;">
+          ⚠️ دماغك يعتقد أنه وقت النهار<br><br>
+          🧠 انخفاض الميلاتونين<br>
+          😴 تأخر النوم<br>
+          📉 ضعف التركيز
+        </div>`;
+    } else {
+      resultDiv.innerHTML = `
+        <div style="background:#ecfdf5; color:#1e293b; padding:20px; border-radius:15px; border:2px solid #22c55e; line-height:2; font-weight:bold;">
+          🌿 نوم صحي<br><br>
+          💤 إفراز طبيعي للميلاتونين<br>
+          💪 تركيز أفضل
+        </div>`;
+    }
+  }
+  
+  // ربط الأزرار
+  document.getElementById('yesBtn').addEventListener('click', addYes);
+  document.getElementById('noBtn').addEventListener('click', addNo);
+  document.getElementById('resetStats').addEventListener('click', resetStats);
+  
+  // تحميل الإحصائيات عند بدء الصفحة
+  loadStats();
+  
+  // تحسين إضافي: إغلاق المحتوى عند النقر خارج الأزرار (اختياري)
+  document.addEventListener('click', function(e) {
+    // إذا كان النقر على زر box أو داخل محتوى مفتوح، لا نغلق
+    if (e.target.closest('.box') || e.target.closest('.content')) return;
+    // وإلا نغلق كل المحتويات
+    document.querySelectorAll('.content').forEach(content => {
+      content.classList.remove('open');
+    });
+  });
 </script>
 </body>
 </html>
- 

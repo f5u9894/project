@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>تأثير الضوء الأزرق على النوم | موقع تفاعلي</title>
+<title>تأثير الضوء الأزرق على النوم | موقع تفاعلي شامل</title>
 <!-- Chart.js للرسم البياني -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <!-- Font Awesome 6 للأيقونات -->
@@ -48,7 +48,7 @@
     color: var(--text-color);
   }
 
-  /* طبقة غامقة */
+  /* طبقة التغميق */
   body::before {
     content: "";
     position: fixed;
@@ -61,8 +61,8 @@
     transition: background 0.3s;
   }
 
-  /* جميع المحتويات فوق الطبقة */
-  .header, .top, .experiment-wrap, .box, .about, .character, .section-title, .content, .progress-container, .quiz-area, .chart-container, .back-to-top, .dark-mode-toggle, .mute-toggle, .share-btn {
+  /* كل المحتوى فوق الطبقة */
+  .header, .top, .experiment-wrap, .box, .about, .character, .section-title, .content, .progress-container, .quiz-area, .chart-container, .back-to-top, .dark-mode-toggle, .mute-toggle, .share-btn, .controls, .reading-time {
     position: relative;
     z-index: 2;
   }
@@ -335,6 +335,7 @@
   }
   .quiz-question {
     margin-bottom: 15px;
+    font-weight: bold;
   }
   .quiz-option {
     display: block;
@@ -381,8 +382,11 @@
     }
     .box { font-size: 1rem; }
   }
-  /* تأثيرات صوتية اختيارية */
-  .sound-toggle { background: rgba(0,0,0,0.7); }
+  .reading-time {
+    font-size: 14px;
+    color: #ddd;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
@@ -393,7 +397,7 @@
 </div>
 
 <div class="header">
-  <img src="robot.jpg" class="logo" alt="شعار المشروع">
+  <img src="robot.jpg" class="logo" alt="شعار المشروع" onerror="this.src='https://placehold.co/60x60/6b21a8/white?text=LOGO'">
   <span><i class="fas fa-moon"></i> وعي رقمي</span>
 </div>
 
@@ -404,8 +408,8 @@
   <a href="#start" class="btn primary">ابدأ الرحلة</a>
   <a href="#about" class="btn secondary">تعرف علينا</a>
   <br>
-  <img src="oo.jpg" class="main-img" alt="تأثير الضوء الأزرق">
-  <div style="margin-top: 10px; font-size: 14px; color: #ddd;"><i class="far fa-clock"></i> وقت القراءة: 3 دقائق</div>
+  <img src="oo.jpg" class="main-img" alt="تأثير الضوء الأزرق" onerror="this.src='https://placehold.co/400x250/0f172a/white?text=%D8%AA%D8%A3%D8%AB%D9%8A%D8%B1+%D8%A7%D9%84%D8%B6%D9%88%D8%A1+%D8%A7%D9%84%D8%A3%D8%B2%D8%B1%D9%82'">
+  <div class="reading-time"><i class="far fa-clock"></i> وقت القراءة: 3 دقائق</div>
 </div>
 
 <div class="experiment-wrap">
@@ -434,15 +438,81 @@
 <div id="start"></div>
 <div class="section-title">🌙 لنبدأ الرحلة</div>
 
-<!-- صناديق المحتوى (بنفس الهيكل القديم مع إضافة aria) -->
+<!-- الصندوق 1 -->
 <button class="box" data-content="c1" aria-expanded="false">🔵 ما هو الضوء الأزرق وما هي مصادره؟</button>
-<div id="c1" class="content"><div class="inner-card">... (نفس المحتوى السابق) ...</div></div>
+<div id="c1" class="content">
+  <div class="inner-card">
+    <p>🔵 الضوء الأزرق هو نوع من الضوء الذي نراه بأعيننا، وهو جزء من ضوء الشمس. يتميّز بأن طوله الموجي قصير (400–500 نانومتر)، لذلك يحمل طاقة أعلى مقارنة ببقية ألوان الطيف المرئي.</p>
+    <hr style="margin:15px 0;">
+    <p><b class="highlight">🌞 مصادر الضوء الأزرق</b></p>
+    <div style="margin-bottom:10px;">
+      <b>🔹 مصدر طبيعي:</b><br>☀️ الشمس هي المصدر الرئيسي والأقوى للضوء الأزرق.
+    </div>
+    <div>
+      <b>🔹 مصادر صناعية:</b><br>
+      📱 الهواتف الذكية<br>💻 الأجهزة اللوحية<br>🖥️ الحواسيب<br>📺 شاشات التلفاز<br>💡 مصابيح LED
+    </div>
+  </div>
+</div>
+
+<!-- الصندوق 2 -->
 <button class="box" data-content="c2" aria-expanded="false">🧠 ماذا يحدث عند استخدام الشاشات ليلاً؟</button>
-<div id="c2" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+<div id="c2" class="content">
+  <div class="inner-card">
+    <p>📱 عند استخدام الشاشات ليلاً، يُرسل الضوء الأزرق المنبعث منها إشارات إلى الدماغ تشبه ضوء النهار، مما يقلل إفراز هرمون الميلاتونين المسؤول عن النوم. هذا يؤدي إلى:</p>
+    <p>🌙 تأخر الشعور بالنعاس<br>⏰ تعطيل الساعة البيولوجية<br>😴 صعوبة النوم<br>🌅 صعوبة الاستيقاظ صباحًا<br>📉 التأثير على التركيز والأداء الذهني في اليوم التالي</p>
+    <div class="study-box">
+      📊 <b>وقد أظهرت دراسة:</b><br><br>
+      أُجريت في جامعة هارفارد أن استخدام الأجهزة المضيئة قبل النوم قلّل إفراز الميلاتونين بنسبة تصل إلى <b>55%</b>، وأدى إلى تأخير الساعة البيولوجية لأكثر من <b>ساعة ونصف</b> مقارنة بقراءة الكتب الورقية.
+    </div>
+    <p>هذا التأخير ينعكس على:<br>😴 صعوبة الدخول في النوم<br>🕐 تأخر موعد النوم<br>🌅 صعوبة الاستيقاظ في الصباح</p>
+  </div>
+</div>
+
+<!-- الصندوق 3 -->
 <button class="box" data-content="c3" aria-expanded="false">😴 أعراض اضطرابات النوم</button>
-<div id="c3" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+<div id="c3" class="content">
+  <div class="inner-card">
+    <p>💡 يؤثر نمط الحياة الحديث، خصوصًا استخدام الأجهزة الإلكترونية في المساء، على جودة النوم ومدته بشكل كبير. الأفراد الذين يعانون من اضطرابات النوم غالبًا يواجهون صعوبة بدء النوم، الاستيقاظ المتكرر، أو النوم القصير وغير العميق، مما ينعكس على النشاط اليومي والأداء الذهني والبدني.</p>
+    <hr style="margin:20px 0;">
+    <p><b class="highlight">🌙 تشمل الأعراض الليلية الشائعة:</b></p>
+    <p>🛌 صعوبة الدخول في النوم أو الاستيقاظ المتكرر<br>🌑 الأرق المستمر أو النوم المتقطع<br>😮‍💨 الشخير العالي أو توقف التنفس أثناء النوم<br>🌙 الحركات اللاإرادية أو الكوابيس</p>
+    <hr style="margin:20px 0;">
+    <p><b class="highlight">☀️ أما الأعراض النهارية فتشمل:</b></p>
+    <p>😴 النعاس المفرط خلال اليوم<br>🤕 الصداع الصباحي وضعف التركيز<br>😡 تقلب المزاج أو تراجع الأداء الدراسي/المهني</p>
+  </div>
+</div>
+
+<!-- الصندوق 4 -->
 <button class="box" data-content="c4" aria-expanded="false">🌙 نصائح للحصول على نوم صحي</button>
-<div id="c4" class="content"><div class="inner-card">... (نفس المحتوى) ...</div></div>
+<div id="c4" class="content">
+  <div class="inner-card">
+    <div style="margin-bottom:15px;">
+      <b class="highlight">🕒 أولاً: ثبّت ساعتك البيولوجية</b>
+      <p>✔ الانتظام يساعد على ضبط الساعة البيولوجية (Circadian Rhythm) وتحسين إفراز الميلاتونين طبيعيًا.</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">📵 ثانياً: أوقف الشاشات قبل النوم بساعة</b>
+      <p>✔ تجنب استخدام الهاتف أو الأجهزة اللوحية قبل النوم بـ 60 دقيقة على الأقل.</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">🌙 ثالثاً: هيئ بيئة نوم مثالية</b>
+      <p>✔ اجعل الغرفة مظلمة وهادئة وذات درجة حرارة معتدلة (18–22° مئوية).</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">☕ رابعاً: انتبه لما تتناوله مساءً</b>
+      <p>✔ تجنب الكافيين بعد الساعة 4 مساءً (قهوة، شاي، مشروبات طاقة).</p>
+    </div>
+    <div style="margin-bottom:15px;">
+      <b class="highlight">📖 خامساً: أنشئ روتينًا مهدئًا قبل النوم</b>
+      <p>📚 قراءة كتاب ورقي<br>🧘 تمارين تنفس عميق<br>📝 كتابة أفكارك لتفريغ القلق</p>
+    </div>
+    <div>
+      <b class="highlight">🏃‍♂️ سادساً: مارس النشاط البدني نهارًا</b>
+      <p>✔ النشاط البدني المنتظم يحسّن عمق النوم وجودته.</p>
+    </div>
+  </div>
+</div>
 
 <!-- اختبار سريع -->
 <div class="quiz-area">
@@ -471,129 +541,145 @@
 <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
 <script>
-// 1. تأثير الكتابة التدريجي
-const titleText = "تأثير الضوء الأزرق<br>على النوم";
-let i = 0;
-function typeWriter() {
-  if (i < titleText.length) {
-    document.getElementById("typingTitle").innerHTML = titleText.substring(0, i+1) + (i%2===0?"_":"");
-    i++;
-    setTimeout(typeWriter, 80);
-  } else {
-    document.getElementById("typingTitle").innerHTML = titleText;
+  // 1. تأثير الكتابة التدريجي
+  const titleText = "تأثير الضوء الأزرق<br>على النوم";
+  let idx = 0;
+  function typeWriter() {
+    if (idx < titleText.length) {
+      document.getElementById("typingTitle").innerHTML = titleText.substring(0, idx+1) + (idx%2===0?"_":"");
+      idx++;
+      setTimeout(typeWriter, 80);
+    } else {
+      document.getElementById("typingTitle").innerHTML = titleText;
+    }
   }
-}
-typeWriter();
+  typeWriter();
 
-// 2. شريط التقدم
-window.addEventListener("scroll", () => {
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-  document.getElementById("progressBar").style.width = scrolled + "%";
-});
-
-// 3. وضع ليلي تلقائي + حفظ
-const darkModeToggle = document.getElementById("darkModeToggle");
-if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark");
-darkModeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
-});
-
-// 4. صوت (اختياري مع كتم)
-let soundEnabled = true;
-const muteToggle = document.getElementById("muteToggle");
-muteToggle.addEventListener("click", () => {
-  soundEnabled = !soundEnabled;
-  muteToggle.innerHTML = soundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-});
-function playClick() { if(soundEnabled) { const audio = new Audio('https://www.soundjay.com/misc/sounds/button-click-01.mp3'); audio.volume=0.2; audio.play().catch(e=>{}); } }
-
-// 5. زر العودة للأعلى
-const backBtn = document.getElementById("backToTop");
-window.onscroll = () => { backBtn.style.display = window.scrollY > 300 ? "flex" : "none"; };
-backBtn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
-
-// 6. تجربة النوم + عداد + سبب + مشاركة
-let yesAnswers=0, noAnswers=0;
-function loadStats() {
-  yesAnswers = parseInt(localStorage.getItem("sleepYes")||0);
-  noAnswers = parseInt(localStorage.getItem("sleepNo")||0);
-  updateStatsDisplay(); updateChart();
-}
-function updateStatsDisplay() {
-  document.getElementById("yesCount").innerText = yesAnswers;
-  document.getElementById("noCount").innerText = noAnswers;
-}
-function saveStats() {
-  localStorage.setItem("sleepYes", yesAnswers);
-  localStorage.setItem("sleepNo", noAnswers);
-}
-function showResult(choice, reason=null) {
-  const resultDiv = document.getElementById("result");
-  if(choice==='yes') {
-    resultDiv.innerHTML = `<div style="background:#fff7ed; padding:15px; border-radius:15px;">⚠️ دماغك يعتقد أنه وقت النهار<br>🧠 انخفاض الميلاتونين<br>😴 تأخر النوم</div>`;
-    if(reason) document.getElementById("reasonAdvice").innerHTML = `📌 نصائح لـ ${reason}: حاول وضع هاتفك بعيدًا قبل النوم بـ 30 دقيقة.`;
-  } else {
-    resultDiv.innerHTML = `<div style="background:#ecfdf5; padding:15px; border-radius:15px;">🌿 نوم صحي! 💤 إفراز طبيعي للميلاتونين<br>💪 تركيز أفضل</div>`;
-  }
-}
-document.getElementById("yesBtn").onclick = () => { playClick(); yesAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('yes'); document.getElementById("reasonContainer").style.display = "block"; };
-document.getElementById("noBtn").onclick = () => { playClick(); noAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('no'); document.getElementById("reasonContainer").style.display = "none"; };
-document.getElementById("resetStats").onclick = () => { yesAnswers=0; noAnswers=0; saveStats(); updateStatsDisplay(); updateChart(); document.getElementById("result").innerHTML=""; };
-document.getElementById("shareResultsBtn").onclick = () => { navigator.clipboard.writeText(`نتيجتي في اختبار تأثير الضوء الأزرق: نعم ${yesAnswers} مرات، لا ${noAnswers} مرات. شارك وعيك!`); alert("تم نسخ النتيجة!"); };
-document.getElementById("reasonSelect").onchange = function() { showResult('yes', this.value); };
-loadStats();
-
-// 7. رسم بياني باستخدام Chart.js
-let chart;
-function updateChart() {
-  const ctx = document.getElementById('answersChart').getContext('2d');
-  if(chart) chart.destroy();
-  chart = new Chart(ctx, { type: 'pie', data: { labels: ['نعم', 'لا'], datasets: [{ data: [yesAnswers, noAnswers], backgroundColor: ['#f97316', '#22c55e'] }] } });
-}
-
-// 8. صناديق المحتوى: toggle مع إغلاق الآخرين وحفظ الحالة المفتوحة
-function toggleContent(contentId, btnElement) {
-  const allContents = document.querySelectorAll('.content');
-  const target = document.getElementById(contentId);
-  const isOpening = !target.classList.contains('open');
-  allContents.forEach(c => { c.classList.remove('open'); });
-  if(isOpening) target.classList.add('open');
-  // تحديث aria-expanded
-  document.querySelectorAll('.box').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
-  if(isOpening && btnElement) btnElement.setAttribute('aria-expanded', 'true');
-  // حفظ المحتوى المفتوح في localStorage
-  localStorage.setItem('openedContent', isOpening ? contentId : '');
-}
-document.querySelectorAll('.box').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    playClick();
-    const contentId = btn.getAttribute('data-content');
-    toggleContent(contentId, btn);
+  // 2. شريط التقدم
+  window.addEventListener("scroll", () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("progressBar").style.width = scrolled + "%";
   });
-});
-// استعادة المحتوى المفتوح سابقاً
-const lastOpened = localStorage.getItem('openedContent');
-if(lastOpened) {
-  const btn = document.querySelector(`.box[data-content="${lastOpened}"]`);
-  if(btn) toggleContent(lastOpened, btn);
-}
 
-// 9. اختبار سريع
-document.getElementById("submitQuiz").onclick = () => {
-  const q1 = document.querySelector('input[name="q1"]:checked');
-  const q2 = document.querySelector('input[name="q2"]:checked');
-  let score = 0;
-  if(q1 && q1.value === 'melatonin') score++;
-  if(q2 && q2.value === '60') score++;
-  document.getElementById("quiz-result").innerHTML = `نتيجتك: ${score}/2. ${score===2 ? "ممتاز! 🎉" : "راجع المعلومات مرة أخرى 📚"}`;
-  playClick();
-};
+  // 3. الوضع الليلي مع حفظ
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark");
+  darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+  });
 
-// 10. تحسينات إضافية: منع hover على اللمس (لا حاجة لتعديل كبير)
-// التأكد من عرض الصور القديمة (ro.JPG, robot.jpg, oo.jpg) - موجودة في الخلفية والهيدر والصور.
+  // 4. الصوت (اختياري مع كتم)
+  let soundEnabled = true;
+  const muteToggle = document.getElementById("muteToggle");
+  muteToggle.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    muteToggle.innerHTML = soundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  });
+  function playClick() {
+    if (soundEnabled) {
+      const audio = new Audio('https://www.soundjay.com/misc/sounds/button-click-01.mp3');
+      audio.volume = 0.2;
+      audio.play().catch(e => console.log("الصوت غير مدعوم"));
+    }
+  }
+
+  // 5. زر العودة للأعلى
+  const backBtn = document.getElementById("backToTop");
+  window.onscroll = function() {
+    backBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+  };
+  backBtn.onclick = () => window.scrollTo({top: 0, behavior: "smooth"});
+
+  // 6. تجربة النوم مع عداد، سبب، مشاركة، رسم بياني
+  let yesAnswers = 0, noAnswers = 0;
+  function loadStats() {
+    yesAnswers = parseInt(localStorage.getItem("sleepYes") || 0);
+    noAnswers = parseInt(localStorage.getItem("sleepNo") || 0);
+    updateStatsDisplay();
+    updateChart();
+  }
+  function updateStatsDisplay() {
+    document.getElementById("yesCount").innerText = yesAnswers;
+    document.getElementById("noCount").innerText = noAnswers;
+  }
+  function saveStats() {
+    localStorage.setItem("sleepYes", yesAnswers);
+    localStorage.setItem("sleepNo", noAnswers);
+  }
+  function showResult(choice, reason = null) {
+    const resultDiv = document.getElementById("result");
+    if (choice === 'yes') {
+      resultDiv.innerHTML = `<div style="background:#fff7ed; padding:15px; border-radius:15px; border:2px solid #f97316;">⚠️ دماغك يعتقد أنه وقت النهار<br>🧠 انخفاض الميلاتونين<br>😴 تأخر النوم<br>📉 ضعف التركيز</div>`;
+      if (reason) {
+        let advice = "";
+        if (reason === "تواصل اجتماعي") advice = "حاول تحديد وقت للتواصل قبل النوم بساعة.";
+        else if (reason === "دراسة/عمل") advice = "استخدم فلتر الضوء الأزرق أو نظارة مخصصة.";
+        else if (reason === "ألعاب") advice = "خصص وقتًا للألعاب في الصباح بدل الليل.";
+        else advice = "حاول وضع الهاتف خارج الغرفة قبل النوم.";
+        document.getElementById("reasonAdvice").innerHTML = `📌 نصيحة: ${advice}`;
+      }
+    } else {
+      resultDiv.innerHTML = `<div style="background:#ecfdf5; padding:15px; border-radius:15px; border:2px solid #22c55e;">🌿 نوم صحي! 💤 إفراز طبيعي للميلاتونين<br>💪 تركيز أفضل ونشاط في اليوم التالي</div>`;
+    }
+  }
+  document.getElementById("yesBtn").onclick = () => { playClick(); yesAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('yes'); document.getElementById("reasonContainer").style.display = "block"; };
+  document.getElementById("noBtn").onclick = () => { playClick(); noAnswers++; saveStats(); updateStatsDisplay(); updateChart(); showResult('no'); document.getElementById("reasonContainer").style.display = "none"; document.getElementById("reasonAdvice").innerHTML = ""; };
+  document.getElementById("resetStats").onclick = () => { playClick(); yesAnswers = 0; noAnswers = 0; saveStats(); updateStatsDisplay(); updateChart(); document.getElementById("result").innerHTML = ""; document.getElementById("reasonContainer").style.display = "none"; };
+  document.getElementById("shareResultsBtn").onclick = () => { navigator.clipboard.writeText(`نتيجتي في اختبار تأثير الضوء الأزرق: نعم ${yesAnswers} مرة، لا ${noAnswers} مرة. نوم صحي للجميع! 🌙`); alert("تم نسخ النتيجة! يمكنك مشاركتها الآن."); playClick(); };
+  document.getElementById("reasonSelect").onchange = function() { if (this.value) showResult('yes', this.value); };
+  loadStats();
+
+  // 7. الرسم البياني باستخدام Chart.js
+  let chart;
+  function updateChart() {
+    const ctx = document.getElementById('answersChart').getContext('2d');
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: 'pie',
+      data: { labels: ['نعم', 'لا'], datasets: [{ data: [yesAnswers, noAnswers], backgroundColor: ['#f97316', '#22c55e'] }] }
+    });
+  }
+
+  // 8. صناديق المحتوى: toggle + إغلاق الآخرين + حفظ الحالة
+  function toggleContent(contentId, btnElement) {
+    const allContents = document.querySelectorAll('.content');
+    const target = document.getElementById(contentId);
+    const isOpening = !target.classList.contains('open');
+    allContents.forEach(c => c.classList.remove('open'));
+    if (isOpening) target.classList.add('open');
+    // تحديث aria-expanded
+    document.querySelectorAll('.box').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+    if (isOpening && btnElement) btnElement.setAttribute('aria-expanded', 'true');
+    // حفظ المحتوى المفتوح
+    localStorage.setItem('openedContent', isOpening ? contentId : '');
+  }
+  document.querySelectorAll('.box').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      playClick();
+      const contentId = btn.getAttribute('data-content');
+      toggleContent(contentId, btn);
+    });
+  });
+  // استعادة المحتوى المفتوح سابقاً
+  const lastOpened = localStorage.getItem('openedContent');
+  if (lastOpened) {
+    const btn = document.querySelector(`.box[data-content="${lastOpened}"]`);
+    if (btn) toggleContent(lastOpened, btn);
+  }
+
+  // 9. اختبار سريع
+  document.getElementById("submitQuiz").onclick = () => {
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    let score = 0;
+    if (q1 && q1.value === 'melatonin') score++;
+    if (q2 && q2.value === '60') score++;
+    document.getElementById("quiz-result").innerHTML = `نتيجتك: ${score}/2. ${score === 2 ? "ممتاز! 🎉" : "راجع المعلومات مرة أخرى 📚"}`;
+    playClick();
+  };
 </script>
 </body>
 </html>
